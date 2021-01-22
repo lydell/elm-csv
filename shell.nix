@@ -13,7 +13,7 @@ stdenv.mkDerivation {
   buildInputs = [
     niv.niv
     git
-    node
+    nodejs
 
     # elm
     elmPackages.elm
