@@ -14,6 +14,7 @@ stdenv.mkDerivation {
     niv.niv
     git
     nodejs
+    curl
 
     # elm
     elmPackages.elm

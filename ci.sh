@@ -25,6 +25,9 @@ curl --version || echo "no curl"
 echo "wget?"
 wget --version || echo "no wget"
 
+echo "curl package.elm-lang.org"
+curl https://package.elm-lang.org/
+
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
 # elm-review
