@@ -21,4 +21,5 @@ set -euo pipefail
 # in the 20.05 release of Nix, where it's packaged natively.
 # elm-review
 npm ci
+rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
 npx elm-review
