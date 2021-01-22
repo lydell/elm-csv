@@ -15,7 +15,9 @@ set -euo pipefail
 # elm-format --validate src
 
 elm-tooling/index.js install
-# /home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json --help
+echo "elm-json --help"
+/home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json --help
+echo "elm-json solve"
 /home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json solve --extra elm/json stil4m/elm-syntax elm/project-metadata-utils MartinSStewart/elm-serialize -- review/elm.json
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
