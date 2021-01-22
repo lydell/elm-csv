@@ -23,7 +23,7 @@ set -euo pipefail
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
 # elm-review
-# npm ci
+npm ci
 # rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
 cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
 npx elm-review
