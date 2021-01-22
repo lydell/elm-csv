@@ -25,7 +25,7 @@ curl --version || echo "no curl"
 echo "wget?"
 wget --version || echo "no wget"
 
-echo "curl package.elm-lang.org"
+# echo "curl package.elm-lang.org"
 # SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt curl https://package.elm-lang.org/
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
@@ -34,4 +34,4 @@ echo "curl package.elm-lang.org"
 npm ci
 rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
 cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
-SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt npx elm-review
+npx elm-review
