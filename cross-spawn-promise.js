@@ -26,7 +26,7 @@ var closeArgsToError = function closeArgsToError(code, signal) {
 
 var concatBuffer = function concatBuffer(buffer) {
   if (buffer == null || buffer.length === 0) {
-    return null;
+    return "NULL!";
   } else if (typeof buffer[0] === 'string') {
     return buffer.join('');
   } else if (Buffer.isBuffer(buffer[0])) {
