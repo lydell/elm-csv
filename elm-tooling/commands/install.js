@@ -508,14 +508,21 @@ async function getExecutable({ name, version, cwd = process.cwd(), env = process
     }
     fs.mkdirSync(path.dirname(tool.absolutePath), { recursive: true });
     onProgress(0);
+    let previousPercentage = 0;
+    const wrappedOnProgress = (percentage) => {
+        if (percentage !== previousPercentage) {
+            previousPercentage = percentage;
+            onProgress(percentage);
+        }
+    };
     try {
-        await downloadAndExtract(tool, onProgress);
+        await downloadAndExtract(tool, wrappedOnProgress);
     }
     catch (errorAny) {
         const error = errorAny;
         throw new Error(mixed_1.removeColor(downloadAndExtractSimpleError(tool, error)));
     }
-    onProgress(1);
+    wrappedOnProgress(1);
     return tool.absolutePath;
 }
 exports.getExecutable = getExecutable;
