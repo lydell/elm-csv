@@ -83,19 +83,19 @@ async function installTools(cwd, env, logger, elmToolingJsonPath, tools) {
             return 1;
         }
     }
-    const toolsProgress = tools.missing.map(() => 0);
-    const redraw = () => {
+    const toolsProgress = tools.missing.map(() => formatProgress(0));
+    const redraw = (change) => {
+        if (change !== undefined) {
+            const { index, progress } = change;
+            const progressString = formatProgress(progress);
+            if (toolsProgress[index] === progressString) {
+                return;
+            }
+            toolsProgress[index] = progressString;
+        }
         if (tools.missing.length > 0) {
             logger.progress(tools.missing
-                .map((tool, index) => {
-                const progress = toolsProgress[index];
-                const progressString = typeof progress === "string"
-                    ? progress.padEnd(4)
-                    : `${Math.round(progress * 100)
-                        .toString()
-                        .padStart(3)}%`;
-                return `${mixed_1.bold(progressString)} ${tool.name} ${tool.version}`;
-            })
+                .map((tool, index) => `${mixed_1.bold(toolsProgress[index])} ${tool.name} ${tool.version}`)
                 .join("\n"));
         }
     };
@@ -107,15 +107,12 @@ async function installTools(cwd, env, logger, elmToolingJsonPath, tools) {
     const toolsToRemove = Object.keys(known_tools_1.KNOWN_TOOLS).filter((name) => !presentNames.includes(name));
     const results = [
         ...(await Promise.all(tools.missing.map((tool, index) => downloadAndExtract(tool, (percentage) => {
-            toolsProgress[index] = percentage;
-            redraw();
+            redraw({ index, progress: percentage });
         }).then(() => {
-            toolsProgress[index] = 1;
-            redraw();
+            redraw({ index, progress: 1 });
             return link_1.linkTool(cwd, nodeModulesBinPath, tool);
         }, (error) => {
-            toolsProgress[index] = "ERR!";
-            redraw();
+            redraw({ index, progress: "ERR!" });
             return new Error(downloadAndExtractError(tool, error));
         })))),
         ...tools.existing.map((tool) => link_1.linkTool(cwd, nodeModulesBinPath, tool)),
@@ -139,6 +136,13 @@ function printResults(logger, results) {
         return 1;
     }
     return 0;
+}
+function formatProgress(progress) {
+    return typeof progress === "string"
+        ? progress.padEnd(4)
+        : `${Math.round(progress * 100)
+            .toString()
+            .padStart(3)}%`;
 }
 function removeAllTools(cwd, env, logger, osName, elmToolingJsonPath, what) {
     logger.log(mixed_1.bold(elmToolingJsonPath));
