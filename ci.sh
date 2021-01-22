@@ -19,4 +19,6 @@ elm-tooling/index.js install
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
-elm-review
+# elm-review
+npm ci
+npx elm-review
