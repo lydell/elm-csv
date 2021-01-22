@@ -1,6 +1,6 @@
 {
   "private": true,
   "devDependencies": {
-    "elm-review": "^2.3.3"
+    "elm-review": "^2.4.0"
   }
 }
