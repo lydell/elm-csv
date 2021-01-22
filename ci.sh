@@ -26,7 +26,7 @@ echo "wget?"
 wget --version || echo "no wget"
 
 echo "curl package.elm-lang.org"
-curl https://package.elm-lang.org/
+SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt curl https://package.elm-lang.org/
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
@@ -34,4 +34,4 @@ curl https://package.elm-lang.org/
 npm ci
 rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
 cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
-npx elm-review
+SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt npx elm-review
