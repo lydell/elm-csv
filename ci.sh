@@ -22,4 +22,5 @@ set -euo pipefail
 # elm-review
 npm ci
 rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
+cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
 npx elm-review
