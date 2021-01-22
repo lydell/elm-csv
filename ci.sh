@@ -26,7 +26,7 @@ echo "wget?"
 wget --version || echo "no wget"
 
 echo "curl package.elm-lang.org"
-SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt curl https://package.elm-lang.org/
+# SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt curl https://package.elm-lang.org/
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
