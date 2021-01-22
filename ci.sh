@@ -20,6 +20,11 @@ set -euo pipefail
 # echo "elm-json solve"
 # /home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json solve --extra elm/json stil4m/elm-syntax elm/project-metadata-utils MartinSStewart/elm-serialize -- review/elm.json
 
+echo "curl?"
+which curl || echo "no curl"
+echo "wget?"
+which wget || echo "no wget"
+
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
 # elm-review
