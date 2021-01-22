@@ -14,13 +14,14 @@ set -euo pipefail
 # linting
 # elm-format --validate src
 
-# elm-tooling/index.js install
+elm-tooling/index.js install
 # /home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json --help
+/home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json solve --extra elm/json stil4m/elm-syntax elm/project-metadata-utils MartinSStewart/elm-serialize -- review/elm.json
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
 # elm-review
-npm ci
-rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
-cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
-npx elm-review
+# npm ci
+# rm -rf node_modules/elm-tooling/ && cp -R elm-tooling node_modules/elm-tooling
+# cp cross-spawn-promise.js node_modules/cross-spawn-promise/lib/index.js
+# npx elm-review
