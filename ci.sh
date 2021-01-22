@@ -2,6 +2,8 @@
 #!nix-shell --pure -i bash
 set -euo pipefail
 
+export ELM_HOME=elm-stuff/elm-home
+
 # tests
 # elm-verify-examples
 # elm-test
