@@ -15,7 +15,7 @@ set -euo pipefail
 # elm-format --validate src
 
 elm-tooling/index.js install
-/home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json
+/home/runner/.elm/elm-tooling/elm-json/0.2.8/elm-json --help
 
 # elm-review tries to download elm-json, and it fails in CI. We'll try again
 # in the 20.05 release of Nix, where it's packaged natively.
