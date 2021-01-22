@@ -301,7 +301,7 @@ function downloadFile(url, { onData, onProgress, onError, onSuccess, }) {
         },
     };
 }
-const PROGRESS_UPDATES_PER_SECOND = 10;
+const PROGRESS_UPDATES_PER_SECOND = 60;
 function downloadFileNative(url, { onData, onProgress, onError, onSuccess, }, maxRedirects = 50 // This is curl’s default.
 ) {
     let toKill = {
