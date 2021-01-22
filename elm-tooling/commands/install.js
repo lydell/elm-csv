@@ -301,6 +301,7 @@ function downloadFile(url, { onData, onProgress, onError, onSuccess, }) {
         },
     };
 }
+const PROGRESS_UPDATES_PER_SECOND = 10;
 function downloadFileNative(url, { onData, onProgress, onError, onSuccess, }, maxRedirects = 50 // This is curl’s default.
 ) {
     let toKill = {
@@ -332,10 +333,15 @@ function downloadFileNative(url, { onData, onProgress, onError, onSuccess, }, ma
             case 200: {
                 const contentLength = parseInt((_a = response.headers["content-length"]) !== null && _a !== void 0 ? _a : "", 10);
                 let length = 0;
+                let lastOnProgress = Date.now();
                 response.on("data", (chunk) => {
                     length += chunk.length;
                     onData(chunk);
-                    if (Number.isFinite(contentLength) && contentLength > 0) {
+                    const now = Date.now();
+                    if (Number.isFinite(contentLength) &&
+                        contentLength > 0 &&
+                        now - lastOnProgress >= 1000 / PROGRESS_UPDATES_PER_SECOND) {
+                        lastOnProgress = now;
                         callOnProgressIfReasonable(length / contentLength, onProgress);
                     }
                 });
